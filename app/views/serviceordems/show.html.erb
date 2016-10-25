@@ -1,0 +1,40 @@
+<div class="page-header">
+  <%= link_to serviceordems_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Voltar
+  <% end %>
+  <%= link_to edit_serviceordem_path(@serviceordem), class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    Editar
+  <% end %>
+  <h3>Ordem de serviço</h3>
+</div>
+
+<dl class="dl-horizontal">
+
+  <dt>Cliente:</dt>
+  <dd><%= @serviceordem.client.nome %></dd>
+
+  <dt>Descrição produto:</dt>
+  <dd><%= @serviceordem.desc_produto %></dd>
+
+  <dt>Tec. Atendimento:</dt>
+  <dd><%= @serviceordem.nome_tecnicoatendimento %></dd>
+
+  <dt>Data venda:</dt>
+  <dd><%= @serviceordem.data_venda.blank? ? '' : @serviceordem.data_venda.strftime("%d/%m/%Y")%></dd>
+
+  <dt>Data instalação:</dt>
+  <dd><%= @serviceordem.data_instalacao.blank? ? '' : @serviceordem.data_instalacao.strftime("%d/%m/%Y")%></dd>
+
+  <dt>Forma pagamento:</dt>
+  <dd><%= @serviceordem.desc_formapagamento %></dd>
+
+  <dt>Tele parente 1:</dt>
+  <dd><%= @serviceordem.tele_parente1 %></dd>
+
+  <dt>Tele parente 2:</dt>
+  <dd><%= @serviceordem.tele_parente2 %></dd>
+
+
+</dl>

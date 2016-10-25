@@ -1,0 +1,44 @@
+<div class="page-header">
+  <%= link_to clients_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Voltar
+  <% end %>
+  <%= link_to edit_client_path(@client), class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    Editar
+  <% end %>
+  <h3>Cliente</h3>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Nome:</dt>
+  <dd><%= @client.nome %></dd>
+
+  <dt>Telefone1:</dt>
+  <dd><%= @client.telefone1 %></dd>
+
+  <dt>Telefone2:</dt>
+  <dd><%= @client.telefone2 %></dd>
+
+  <dt>UF:</dt>
+  <dd><%= @client.desc_uf %></dd>
+
+  <dt>Cidade:</dt>
+  <dd><%= @client.nome_cidade %></dd>
+
+  <dt>Endereço:</dt>
+  <dd><%= @client.desc_endereco %></dd>
+
+  <dt>Bairro:</dt>
+  <dd><%= @client.nome_bairro %></dd>
+
+  <dt>Ponto referência:</dt>
+  <dd><%= @client.desc_pontoreferencia %></dd>
+
+  <dt>N°:</dt>
+  <dd><%= @client.numr_endereco %></dd>
+
+  <dt>CEP:</dt>
+  <dd><%= @client.desc_cep %></dd>
+
+</dl>

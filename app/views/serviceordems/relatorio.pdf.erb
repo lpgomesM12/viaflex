@@ -1,0 +1,121 @@
+<meta charset="utf-8">
+
+<table style="width:100%" id="t02">
+  <tr>
+    <td>
+    <%= wicked_pdf_image_tag 'viaflex.jpg', :style=>"width:170px;height:100px;"%>
+    </td>
+    <td align="right" style=" margin-top:0px">
+         Central de Atendimento (62) 4103-4377<br>
+          <strong>ORDEM DE SERVIÇO</strong><br>
+          N° <%=@serviceordem.id%>
+    </td>
+  </tr>
+</table>
+
+<hr style="width:100%; color:#000000"></hr>
+
+<table style="width:100%" id="t02">
+  <tr>
+    <td><strong>Cliente: </strong><%=@serviceordem.client.nome%></td>
+    <td><strong>Telefone: </strong><%=@serviceordem.client.telefone1%></td>
+  </tr>
+  <tr>
+    <td><strong>Endereço: </strong><%=@serviceordem.client.desc_endereco%> </td>
+  </tr>
+  <tr>
+    <td><strong>Cidade: </strong><%=@serviceordem.client.nome_cidade%> </td>
+    <td><strong>UF: </strong><%=@serviceordem.client.desc_uf%> </td>
+  </tr>
+</table>
+
+<hr style="width:100%; color:#000000"></hr>
+
+<label>Descrição Produto</label>
+<table id="t03" style="width:100%">
+ <tr>
+   <td style="height: 50px;"><%=@serviceordem.desc_produto%><br></td>
+ </tr>
+</table>
+
+<br>
+
+<table id="t01" style="width:100%">
+ <tr>
+   <th align="left" style="width:50%">Data Venda</th>
+   <th align="left">Data Instalação</th>
+ </tr>
+ <tr>
+   <td><%= @serviceordem.data_venda.blank? ? '' : @serviceordem.data_venda.strftime("%d/%m/%Y")%></td>
+   <td><%= @serviceordem.data_instalacao.blank? ? '' : @serviceordem.data_instalacao.strftime("%d/%m/%Y")%></td>
+ </tr>
+</table>
+
+<br>
+
+<table id="t01" style="width:100%">
+ <tr>
+   <th align="left">Tecnico Atendimento</th>
+   <th align="left">Forma de Pagamento</th>
+ </tr>
+ <tr>
+   <td><%= @serviceordem.nome_tecnicoatendimento%></td>
+   <td><%= @serviceordem.desc_formapagamento%></td>
+ </tr>
+</table>
+
+<br>
+<br>
+<br>
+<br>
+
+<table style="width:100%" id="t02">
+  <tr>
+    <td align="center">
+      <hr style="color:#000000">
+      Assinatura do cliente
+    </td>
+    <td style="width:5%">
+    </td>
+    <td align="center">
+      <hr style="color:#000000">
+      Assinatura do técnico
+    </td>
+  </tr>
+</table>
+
+<style media="screen">
+
+
+table#t01 th {
+    background-color: #cbcbcb;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    font-size: 11px;
+}
+
+
+table#t02 th {
+  border:none !important;
+  border-collapse: collapse;
+}
+
+table#t02 td {
+  border:none !important;
+  border-collapse: collapse;
+}
+table#t02  {
+  border:none !important;
+  border-collapse: collapse;
+  padding:2px;
+}
+
+table#t03 tr td {
+    border:none !important;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+
+  </style>

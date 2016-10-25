@@ -1,0 +1,51 @@
+<div class="page-header">
+  <%= link_to new_serviceordem_path, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+     Ordem de Serviço
+  <% end %>
+  <h3>Lista de Ordem de Serviço</h3>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover table-condensed">
+    <thead>
+      <tr>
+            <th>Cliente</th>
+            <th>Data venda</th>
+            <th>Data instalacao</th>
+            <th>Técnico At.</th>
+            <th>Forma de pagamento</th>
+            <th>Tele parente1</th>
+            <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @serviceordems) do |serviceordem| %>
+            <td><%= serviceordem.client.nome %></td>
+            <td><%= serviceordem.data_venda.blank? ? '' : serviceordem.data_venda.strftime("%d/%m/%Y") %></td>
+            <td><%= serviceordem.data_instalacao.blank? ? '' : serviceordem.data_instalacao.strftime("%d/%m/%Y") %></td>
+            <td><%= serviceordem.nome_tecnicoatendimento %></td>
+            <td><%= serviceordem.desc_formapagamento %></td>
+            <td><%= serviceordem.tele_parente1 %></td>
+            <td align='right'>
+              <div class="btn-group">
+                  <%= link_to serviceordem, class: "btn btn-default btn-sm" do %>
+                    <span class="glyphicon glyphicon-list-alt text-success"></span> Exibir
+                  <% end %>
+                  <%= link_to edit_serviceordem_path(serviceordem), class: "btn btn-default btn-sm" do %>
+                    <span class="glyphicon glyphicon-pencil text-primary"></span> Editar
+                  <% end %>
+                 <%= link_to serviceordem, method: :delete, data: { confirm: 'Deseja excluir o registro?' }, class: "btn btn-default btn-sm" do %>
+                    <span class="glyphicon glyphicon-trash text-danger"></span> Excluir
+                  <% end %>
+                  <%= link_to  relatorio_path(serviceordem, format: :pdf), class: "btn btn-default btn-sm" do %>
+                    <span class="glyphicon glyphicon-print"></span> Imprimir
+                  <% end %>
+              </div>
+            </td>
+      <% end %>
+    </tbody>
+  </table>
+   <%= paginate @serviceordems, :window => 2 %>
+</div>

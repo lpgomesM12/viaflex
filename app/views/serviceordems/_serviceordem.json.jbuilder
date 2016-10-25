@@ -1,0 +1,2 @@
+json.extract! serviceordem, :id, :desc_produto, :nome_tecnicoatendimento, :data_venda, :data_instalacao, :desc_formapagamento, :tele_parente1, :tele_parente2, :client_id, :created_at, :updated_at
+json.url serviceordem_url(serviceordem, format: :json)

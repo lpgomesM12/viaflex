@@ -1,0 +1,13 @@
+<div class="page-header">
+  <%= link_to serviceordems_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Voltar
+  <% end %>
+  <%= link_to @serviceordem, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-info-sign"></span>
+    Exibir
+  <% end %>
+  <h3>Editar ordem de serviço</h3>
+</div>
+
+<%= render 'form' %>

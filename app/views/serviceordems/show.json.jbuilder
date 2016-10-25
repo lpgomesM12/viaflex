@@ -1,0 +1,1 @@
+json.partial! "serviceordems/serviceordem", serviceordem: @serviceordem
