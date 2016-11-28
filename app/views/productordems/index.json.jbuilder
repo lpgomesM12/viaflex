@@ -1,0 +1,1 @@
+json.array! @productordems, partial: 'productordems/productordem', as: :productordem

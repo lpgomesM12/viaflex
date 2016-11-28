@@ -1,0 +1,35 @@
+<div class="page-header">
+  <%= link_to new_productordem_path, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+    New Productordem
+  <% end %>
+  <h1>Listing productordems</h1>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+            <th>Serviceordem</th>
+            <th>Product</th>
+            <th>Valor product</th>
+            <th>Qtd product</th>
+            <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @productordems) do |productordem| %>
+            <td><%= productordem.serviceordem %></td>
+            <td><%= productordem.product %></td>
+            <td><%= productordem.valor_product %></td>
+            <td><%= productordem.qtd_product %></td>
+            <td><%= link_to 'Show', productordem %></td>
+        <td><%= link_to 'Edit', edit_productordem_path(productordem) %></td>
+        <td><%= link_to 'Destroy', productordem, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tbody>
+  </table>
+</div>

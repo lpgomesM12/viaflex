@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  serviceordem_id: 
+  service_id: 
+  valor_service: 9.99
+  qtd_service: 1
+
+two:
+  serviceordem_id: 
+  service_id: 
+  valor_service: 9.99
+  qtd_service: 1

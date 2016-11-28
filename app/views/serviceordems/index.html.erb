@@ -1,4 +1,19 @@
 <div class="page-header">
+
+  <%= form_tag nil, method: 'GET' do %>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="input-group">
+          <input id="q" name="q" type="text" value="<%=@q%>" class="form-control" placeholder="Pesquise pelo o NOME, CPF ou CNPJ do cliente">
+          <span class="input-group-btn">
+            <button class="btn btn-success" type="submit" >Buscar</button>
+          </span>
+        </div><!-- /input-group -->
+      </div><!-- /.col-lg-6 -->
+    </div><!-- /.row -->
+    <br />
+  <% end %>
+
   <%= link_to new_serviceordem_path, class: 'btn btn-primary' do %>
     <span class="glyphicon glyphicon-plus"></span>
      Ordem de Serviço
@@ -10,42 +25,58 @@
   <table class="table table-striped table-bordered table-hover table-condensed">
     <thead>
       <tr>
+            <th>N°</th>
             <th>Cliente</th>
             <th>Data venda</th>
             <th>Data instalacao</th>
             <th>Técnico At.</th>
             <th>Forma de pagamento</th>
             <th>Tele parente1</th>
+            <th>Situação</th>
             <th></th>
       </tr>
     </thead>
 
     <tbody>
       <%= content_tag_for(:tr, @serviceordems) do |serviceordem| %>
-            <td><%= serviceordem.client.nome %></td>
+            <td><%= serviceordem.id %></td>
+            <td><%= serviceordem.client.nome rescue nil %></td>
             <td><%= serviceordem.data_venda.blank? ? '' : serviceordem.data_venda.strftime("%d/%m/%Y") %></td>
             <td><%= serviceordem.data_instalacao.blank? ? '' : serviceordem.data_instalacao.strftime("%d/%m/%Y") %></td>
             <td><%= serviceordem.nome_tecnicoatendimento %></td>
             <td><%= serviceordem.desc_formapagamento %></td>
             <td><%= serviceordem.tele_parente1 %></td>
+            <td><%= serviceordem.situacao %></td>
             <td align='right'>
               <div class="btn-group">
-                  <%= link_to serviceordem, class: "btn btn-default btn-sm" do %>
-                    <span class="glyphicon glyphicon-list-alt text-success"></span> Exibir
+                  <%= link_to serviceordem, class: "btn btn-default btn-sm",  :rel=>"tooltip", :title=>"Ver" do %>
+                    <span class="glyphicon glyphicon-eye-open"></span>
                   <% end %>
-                  <%= link_to edit_serviceordem_path(serviceordem), class: "btn btn-default btn-sm" do %>
-                    <span class="glyphicon glyphicon-pencil text-primary"></span> Editar
+                  <%= link_to edit_serviceordem_path(serviceordem), class: "btn btn-default btn-sm", :rel=>"tooltip", :title=>"Editar" do %>
+                    <span class="glyphicon glyphicon-pencil text-primary"></span>
                   <% end %>
-                 <%= link_to serviceordem, method: :delete, data: { confirm: 'Deseja excluir o registro?' }, class: "btn btn-default btn-sm" do %>
-                    <span class="glyphicon glyphicon-trash text-danger"></span> Excluir
+                 <%= link_to serviceordem, method: :delete, data: { confirm: 'Deseja excluir o registro?' }, class: "btn btn-default btn-sm", :rel=>"tooltip", :title=>"Excluir" do %>
+                    <span class="glyphicon glyphicon-trash text-danger"></span>
                   <% end %>
-                  <%= link_to  relatorio_path(serviceordem, format: :pdf), class: "btn btn-default btn-sm" do %>
-                    <span class="glyphicon glyphicon-print"></span> Imprimir
+                  <%= link_to  relatorio_path(serviceordem, format: :pdf), class: "btn btn-default btn-sm", :rel=>"tooltip", :title=>"PDF" do %>
+                    <span class="glyphicon glyphicon-print"></span>
                   <% end %>
               </div>
             </td>
       <% end %>
     </tbody>
   </table>
+  <div align="center">
    <%= paginate @serviceordems, :window => 2 %>
+ </div>
 </div>
+
+
+
+<script type="text/javascript">
+
+$(function(){
+$("a[rel='tooltip']").tooltip();
+})
+
+</script>

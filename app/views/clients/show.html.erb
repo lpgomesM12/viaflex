@@ -7,12 +7,18 @@
     <span class="glyphicon glyphicon-pencil"></span>
     Editar
   <% end %>
-  <h3>Cliente</h3>
+  <h3>Dados do Cliente</h3>
 </div>
 
 <dl class="dl-horizontal">
   <dt>Nome:</dt>
   <dd><%= @client.nome %></dd>
+
+  <dt>CPF:</dt>
+  <dd><%= @client.cpf %></dd>
+
+  <dt>RG:</dt>
+  <dd><%= @client.rg %></dd>
 
   <dt>Telefone1:</dt>
   <dd><%= @client.telefone1 %></dd>
@@ -41,4 +47,13 @@
   <dt>CEP:</dt>
   <dd><%= @client.desc_cep %></dd>
 
+  <hr>
+   <h4>Situação financeira cadastral</h4>
+
+
+   <dt>Situação:</dt>
+   <dd><%= @client.situacao %></dd>
+
+   <dt>Observação:</dt>
+   <dd><%= @client.observacao %></dd>
 </dl>

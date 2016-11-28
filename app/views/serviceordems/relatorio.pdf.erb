@@ -1,9 +1,11 @@
 <meta charset="utf-8">
 
+
+
 <table style="width:100%" id="t02">
   <tr>
     <td>
-    <%= wicked_pdf_image_tag 'viaflex.jpg', :style=>"width:170px;height:100px;"%>
+    <font style="font-size:40px"><strong>VIA FLEX</strong></font>
     </td>
     <td align="right" style=" margin-top:0px">
          Central de Atendimento (62) 4103-4377<br>
@@ -12,6 +14,22 @@
     </td>
   </tr>
 </table>
+<p align="center">
+   <font style="font-size:30px"> <strong>Soluções Avançadas</strong></font><br>
+   <font style="font-size:10px">SERVIÇO DE INSTALAÇÃO</font></br>
+   <font style="font-size:10px" >E MANUTENÇÃO DE ANTENAS</font><br>
+   <font style="font-size:10px">COLETIVAS RESIDENCIAL E PREDIA</font>
+</p>
+<p align="center" style="font-size:10px">
+  Av.Transamazonica, Qd 89-Lt 18 -cidade livre– CEP 74970-360- Fone/fax: (062) 4103-4377<br>
+Aparecida de Goiânia-GO
+</p>
+<!-- <div aling="center">
+<label align="center"><strong>soluções avançadas</strong><label><br>
+<label align="center">SERVIÇO DE INSTALAÇÃO</label><br>
+<label align="center">E MANUTENÇÃO DE ANTENAS</label><br>
+<label align="center">COLETIVAS RESIDENCIAL E PREDIAL</label>
+</div> -->
 
 <hr style="width:100%; color:#000000"></hr>
 
@@ -31,7 +49,60 @@
 
 <hr style="width:100%; color:#000000"></hr>
 
-<label>Descrição Produto</label>
+<table id="t01"  style="width:100%">
+<thead>
+   <tr>
+     <th align="center">ITEM</th>
+      <th align="left">DESCRIÇÃO DOS SERVIÇOS/MATERIAIS</th>
+     <th align="left">QTD.</th>
+     <th align="left">UNID.R$</th>
+     <th align="center">TOTAL R$</th>
+   </tr>
+</thead>
+   <%@cont = 1%>
+   <%@valorTotal = 0%>
+  <tbody>
+    <% @serviceordem.productordem.each do |productordem| %>
+    <tr>
+        <td align="center"><%=@cont%></td>
+        <td><%= productordem.product.nome_produto%></td>
+        <td><%= productordem.qtd_product%></td>
+        <td><%= number_to_currency(productordem.valor_product, unit: "R$", separator: ",", delimiter: ".") %></td>
+        <td align="center"><%= number_to_currency(productordem.valor_product * productordem.qtd_product, unit: "R$", separator: ",", delimiter: ".") %></td>
+   </tr>
+     <%@cont = @cont + 1 %>
+     <%@valorTotal = @valorTotal + productordem.valor_product * productordem.qtd_product%>
+    <%end%>
+    <% @serviceordem.serviceordemservice.each do |serviceordemservice| %>
+    <tr>
+        <td align="center"><%=@cont%></td>
+        <td><%= serviceordemservice.service.nome_servico%></td>
+        <td><%= serviceordemservice.qtd_service%></td>
+        <td><%= number_to_currency(serviceordemservice.valor_service, unit: "R$", separator: ",", delimiter: ".") %></td>
+        <td align="center"><%= number_to_currency(serviceordemservice.valor_service * serviceordemservice.qtd_service, unit: "R$", separator: ",", delimiter: ".") %></td>
+   </tr>
+     <%@cont = @cont + 1 %>
+     <%@valorTotal = @valorTotal + serviceordemservice.valor_service * serviceordemservice.qtd_service%>
+    <%end%>
+
+
+    <tr>
+      <td><br></td>
+      <td><br></td>
+      <td><br></td>
+      <td><br></td>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td colspan="4" align="right"><strong>TOTAL</strong></td>
+      <td align="center"><%= number_to_currency(@valorTotal, unit: "R$", separator: ",", delimiter: ".") %></td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+<label>Observação</label>
 <table id="t03" style="width:100%">
  <tr>
    <td style="height: 50px;"><%=@serviceordem.desc_produto%><br></td>
@@ -44,10 +115,14 @@
  <tr>
    <th align="left" style="width:50%">Data Venda</th>
    <th align="left">Data Instalação</th>
+   <th align="left">Validade da Proposta</th>
+   <th align="left">Prazo de Entrega</th>
  </tr>
  <tr>
-   <td><%= @serviceordem.data_venda.blank? ? '' : @serviceordem.data_venda.strftime("%d/%m/%Y")%></td>
-   <td><%= @serviceordem.data_instalacao.blank? ? '' : @serviceordem.data_instalacao.strftime("%d/%m/%Y")%></td>
+   <td><%= @serviceordem.data_venda.blank? ? '<br>'.html_safe : @serviceordem.data_venda.strftime("%d/%m/%Y")%></td>
+   <td><%= @serviceordem.data_instalacao.blank? ? '<br>'.html_safe : @serviceordem.data_instalacao.strftime("%d/%m/%Y")%></td>
+   <td align="center"><%= @serviceordem.dias_validadeproposta%> Dias</td>
+   <td align="center"><%= @serviceordem.dias_prazoentrega%> Dias</td>
  </tr>
 </table>
 

@@ -17,9 +17,11 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body style="background:#ededed none repeat scroll 0 0">
 
-<%= render 'layouts/menu' %>
+<%if user_signed_in?%>
+ <%= render 'layouts/menu' %>
+<%end%>
 
   <div class="container">
     <% flash.each do |name, msg| %>
@@ -29,7 +31,11 @@
       <% end %>
     <% end %>
 
-    <%= yield %>
-  </div>
+    <div class="panel panel-default">
+      <div class="panel-body">
+            <%= yield %>
+      </div>
+     </div>
+    </div>
 </body>
 </html>

@@ -16,6 +16,9 @@ gem 'momentjs-rails', '>= 2.9.0'
 gem 'wkhtmltopdf-binary'
 gem 'wicked_pdf'
 gem 'kaminari'
+gem "paperclip", "~> 5.0.0"
+gem "cocoon"
+gem 'devise'
 # gem 'bootstrap3-datetimepicker-rails', '~> 4.17.42'
 
 

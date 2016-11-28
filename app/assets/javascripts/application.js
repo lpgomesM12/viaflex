@@ -18,4 +18,5 @@
 //= require bootstrap
 //= require plugins/daterangepicker/daterangepicker
 //= require plugins/datepicker/bootstrap-datepicker
+//= require cocoon
 //= require_tree .

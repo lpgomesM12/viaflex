@@ -1,0 +1,35 @@
+<div class="page-header">
+  <%= link_to new_serviceordemservice_path, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+    New Serviceordemservice
+  <% end %>
+  <h1>Listing serviceordemservices</h1>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+            <th>Serviceordem</th>
+            <th>Service</th>
+            <th>Valor service</th>
+            <th>Qtd service</th>
+            <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @serviceordemservices) do |serviceordemservice| %>
+            <td><%= serviceordemservice.serviceordem %></td>
+            <td><%= serviceordemservice.service %></td>
+            <td><%= serviceordemservice.valor_service %></td>
+            <td><%= serviceordemservice.qtd_service %></td>
+            <td><%= link_to 'Show', serviceordemservice %></td>
+        <td><%= link_to 'Edit', edit_serviceordemservice_path(serviceordemservice) %></td>
+        <td><%= link_to 'Destroy', serviceordemservice, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tbody>
+  </table>
+</div>

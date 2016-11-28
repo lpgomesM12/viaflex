@@ -1,0 +1,1 @@
+json.partial! "productordems/productordem", productordem: @productordem

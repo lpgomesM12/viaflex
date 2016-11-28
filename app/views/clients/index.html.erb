@@ -1,4 +1,20 @@
 <div class="page-header">
+
+  <%= form_tag nil, method: 'GET' do %>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="input-group">
+          <input id="q" name="q" type="text" value="<%=@q%>" class="form-control" placeholder="Pesquise pelo o NOME, CPF ou CNPJ">
+          <span class="input-group-btn">
+            <button class="btn btn-success" type="submit" >Buscar</button>
+          </span>
+        </div><!-- /input-group -->
+      </div><!-- /.col-lg-6 -->
+    </div><!-- /.row -->
+    <br />
+  <% end %>
+
+  <hr>
   <%= link_to new_client_path, class: 'btn btn-primary' do %>
     <span class="glyphicon glyphicon-plus"></span>
     Novo Cliente
@@ -44,5 +60,7 @@
       <% end %>
     </tbody>
   </table>
-  <%= paginate @clients, :window => 2 %>
+  <div align="center">
+    <%= paginate @clients, :window => 2 %>
+  </div>
 </div>

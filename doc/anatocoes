@@ -1,0 +1,31 @@
+Cadastro Cliente:
+   Situação Cliente
+   Ótimo, Bom, Ruim... com campo descritivo
+
+Anotações de serviço
+
+Ordem de Serviço:
+  Adionar campos CPF, RG
+  Ordem de serviço adcionar opção para   SITUAÇÃO: instalado,reagendado,cancelado,realizado,
+  Adicionar campo Turno Horario: Vespertino, Matutino, Noturno
+  Adicionar Campo Horario: Hora Incio Hora Fim.
+  Adicionar opção para anexar foto.
+  Cadastro de senha... Perfil usuário.. ADM, USER
+
+ -Criar pagina Agendamentos
+
+============================================================
+-Criar historico de ordem de serviço por cliente.
+============================================================
+
+ Orçamento:
+
+ Garantia Serviço:
+ Garantia Produto:
+
+ Qdt, Decrição Produto, Valor Uni. Valor Total
+===========================================================
+
+
+
+Total Geral

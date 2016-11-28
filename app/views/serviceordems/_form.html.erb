@@ -12,75 +12,443 @@
     </div>
   <% end %>
 
-  <div class="form-group">
-    <label class="col-sm-2 control-label">Cliente</label>
-    <div class="col-sm-8">
-      <input type="text" name="nome" id="nome" class="form-control" value="<%=@serviceordem.client_id? ? @serviceordem.client.nome : ''%>" placeholder="Pesquise pelo Cliente" onfocus="javascript:$(this).autocomplete('search','')">
-      <%= f.hidden_field :client_id %>
-    </div>
-    <div class="col-sm-2">
-        <%= link_to new_client_path, class: 'btn btn-primary' do %>
-          <span class="glyphicon glyphicon-plus"></span>
-          Novo Cliente
-        <% end %>
-    </div>
-  </div>
+ <div id = "alert_placeholder"></div>
 
-  <div class="form-group">
-    <label class="col-sm-2 control-label">Descrição Produto</label>
-    <div class="col-sm-10">
-      <%= f.text_area :desc_produto, class: "form-control" %>
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="col-sm-2 control-label">Técnico Atendimento</label>
-    <div class="col-sm-10">
-      <%= f.text_field :nome_tecnicoatendimento, class: "form-control" %>
-    </div>
-  </div>
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">Dados</a></li>
+    <li><a data-toggle="tab" href="#menu1">Produtos</a></li>
+    <li><a data-toggle="tab" href="#menu2">Serviços</a></li>
+    <li><a data-toggle="tab" href="#menu3">Enexo</a></li>
+  </ul>
 
-  <div class="form-group">
-    <label class="col-sm-2 control-label">Data Venda</label>
-    <div class="col-sm-2">
-     <div class="input-group date" id="datetimepicker1">
-       <%= f.text_field :data_venda, class: 'form-control' %>
-       <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+  <div class="tab-content">
+
+    <div id="home" class="tab-pane fade in active">
+        <br>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Situação</label>
+        <div class="col-sm-2">
+          <%= f.collection_select :situacao, Serviceordem::SITUACAO, :to_s, :humanize,{},{ :class => 'form-control'}%>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Cliente</label>
+        <div class="col-sm-8">
+          <input type="text" name="nome" id="nome" class="form-control" value="<%=@serviceordem.client_id? ? @serviceordem.client.nome : ''%>" placeholder="Pesquise pelo Cliente" onfocus="javascript:$(this).autocomplete('search','')">
+          <%= f.hidden_field :client_id %>
+        </div>
+        <div class="col-sm-2">
+            <%= link_to new_client_path, class: 'btn btn-primary' do %>
+              <span class="glyphicon glyphicon-plus"></span>
+              Novo Cliente
+            <% end %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Descrição</label>
+        <div class="col-sm-10">
+          <%= f.text_area :desc_produto, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Técnico Atendimento</label>
+        <div class="col-sm-10">
+          <%= f.text_field :nome_tecnicoatendimento, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Data Venda</label>
+        <div class="col-sm-2">
+         <div class="input-group date" id="datetimepicker1">
+           <%= f.text_field :data_venda, class: 'form-control' %>
+           <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+         </div>
+        </div>
+        <label class="col-sm-2 control-label">Data Instalação</label>
+        <div class="col-sm-2">
+         <div class="input-group date" id="datetimepicker2">
+           <%= f.text_field :data_instalacao, class: 'form-control'%>
+           <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+         </div>
+        </div>
+        <label class="col-sm-1 control-label">Turno</label>
+        <div class="col-sm-3">
+          <%= f.collection_select :turno, Serviceordem::TURNO, :to_s, :humanize,{},{ :class => 'form-control' }%>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Dias Validade Proposta</label>
+        <div class="col-sm-2">
+          <%= f.text_field :dias_validadeproposta, class: "form-control" %>
+        </div>
+        <label class="col-sm-2 control-label">Dias Prazo Entrega</label>
+        <div class="col-sm-2">
+          <%= f.text_field :dias_prazoentrega, class: "form-control" %>
+        </div>
+        <label class="col-sm-2 control-label">Forma de Pagamento</label>
+        <div class="col-sm-2">
+          <%= f.collection_select :desc_formapagamento, Serviceordem::FORMAPAGEMENTO, :to_s, :humanize,{},{ :class => 'form-control' }%>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Hora Inicio</label>
+        <div class="col-sm-2">
+          <%= f.text_field :horainicio, class: "form-control" %>
+        </div>
+        <label class="col-sm-2 control-label">Hora Fim</label>
+        <div class="col-sm-2">
+          <%= f.text_field :horafim, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Tel. parente 1</label>
+        <div class="col-sm-2">
+          <%= f.text_field :tele_parente1, class: "form-control" %>
+        </div>
+        <label class="col-sm-2 control-label">Tel. parente 2</label>
+        <div class="col-sm-2">
+          <%= f.text_field :tele_parente2, class: "form-control" %>
+        </div>
+      </div>
+    </div>
+
+    <div id="menu1" class="tab-pane fade">
+     <br>
+     <div class="form-group">
+        <div class="col-sm-7">
+          <label for="produto">Produto</label>
+          <input type="text" class="form-control" id="produto" placeholder="Pesquise pelo produto" onfocus="javascript:$(this).autocomplete('search','')">
+          <input type="hidden" name="produto_id" id="produto_id">
+        </div>
+
+        <div class="col-sm-2">
+          <label for="produto">Valor Unitário</label>
+          <input type="text" class="form-control" id="valor_produto">
+        </div>
+
+        <div class="col-sm-1">
+          <label for="produto">Qtd</label>
+          <input type="text" class="form-control" id="quantidade">
+        </div>
+
+       <div class="col-sm-2"><br>
+         <button type="button" class="btn btn-primary" id="btnSalvar">
+            Adicionar <span class="glyphicon glyphicon-arrow-down"></span>
+         </button>
+      </div>
      </div>
+
+     <table class="table table-hover table-condensed">
+     <thead>
+       <tr>
+         <th>Produto</th>
+         <th>Valor Unit.</th>
+         <th>Qtd</th>
+         <th style="text-align: right">Valor</th>
+       </tr>
+     </thead>
+     <tbody id="tbprodutos">
+     </tbody>
+
+     <tfoot>
+     <tr>
+      <td colspan="2"></td>
+      <td></td>
+      <td align="right">Total <label id="valor_total_produto" style="color:red"></label></td>
+     </tr>
+    </tfoot>
+   </table>
+
     </div>
-    <label class="col-sm-2 control-label">Data Instalação</label>
-    <div class="col-sm-2">
-     <div class="input-group date" id="datetimepicker2">
-       <%= f.text_field :data_instalacao, class: 'form-control'%>
-       <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+    <div id="menu2" class="tab-pane fade">
+
+      <br>
+      <div class="form-group">
+         <div class="col-sm-7">
+           <label for="servico">Serviço</label>
+           <input type="text" class="form-control" id="servico" placeholder="Pesquise pelo serviço" onfocus="javascript:$(this).autocomplete('search','')">
+           <input type="hidden" name="produto_id" id="servico_id">
+         </div>
+
+         <div class="col-sm-2">
+           <label for="produto">Valor Unitário</label>
+           <input type="text" class="form-control" id="valor_servico">
+         </div>
+
+         <div class="col-sm-1">
+           <label for="produto">Qtd</label>
+           <input type="text" class="form-control" id="quantidade_servico">
+         </div>
+
+        <div class="col-sm-2"><br>
+          <button type="button" class="btn btn-primary" id="btnSalvarServico">
+             Adicionar <span class="glyphicon glyphicon-arrow-down"></span>
+          </button>
+       </div>
+      </div>
+
+      <table class="table table-hover table-condensed">
+      <thead>
+        <tr>
+          <th>Serviço</th>
+          <th>Valor Unit.</th>
+          <th>Qtd</th>
+          <th style="text-align: right">Valor</th>
+        </tr>
+      </thead>
+      <tbody id="tbservicos">
+      </tbody>
+
+      <tfoot>
+      <tr>
+       <td colspan="2"></td>
+       <td></td>
+       <td align="right">Total <label id="valor_total_servico" style="color:red"></label></td>
+      </tr>
+     </tfoot>
+    </table>
+
+    </div>
+   <div id="menu3" class="tab-pane fade">
+    <div class="row">
+      <div class="col-lg-12">
+        <h4>Adicione fotos de sua receita</h4>
+      <div id="fotoordemservice">
+        <%= f.fields_for :fotoordemservice do |item| %>
+          <%= render 'fotoordemservice_fields', :f => item %>
+         <% end %>
+          <div class='links'>
+          <br>
+            <%= link_to_add_association 'Adicionar nova foto', f, :fotoordemservice, :class => "btn btn-primary" %>
+          </div>
+       </div>
+
+      </div>
      </div>
-    </div>
+   </div>
+
   </div>
 
+  <hr>
   <div class="form-group">
-    <label class="col-sm-2 control-label">Forma de Pagamento</label>
-    <div class="col-sm-2">
-      <%= f.collection_select :desc_formapagamento, Serviceordem::FORMAPAGEMENTO, :to_s, :humanize,{},{ :class => 'form-control' }%>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label class="col-sm-2 control-label">Tel. parente 1</label>
-    <div class="col-sm-2">
-      <%= f.text_field :tele_parente1, class: "form-control" %>
-    </div>
-    <label class="col-sm-2 control-label">Tel. parente 2</label>
-    <div class="col-sm-2">
-      <%= f.text_field :tele_parente2, class: "form-control" %>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
+    <div class="col-sm-10">
       <%= f.submit  "Salvar" , class: "btn btn-primary" %>
+      <%= link_to serviceordems_path, class: 'btn btn-default' do %>
+        <span class="glyphicon glyphicon-list-alt"></span>
+        Voltar
+      <% end %>
     </div>
+
   </div>
 <% end %>
 
 <script type="text/javascript">
+
+
+//evento que captura ação quando click no butão salvar do modal despesa
+ $(document).ready(function(){
+      $("#btnSalvar").click(function(){
+          var produto = $('#produto_id').val();
+          var valor_produto = $('#valor_produto').val();
+          var quantidade = $('#quantidade').val();
+
+          if(produto == ""){
+            alert_boot('Pesquise pelo produto','danger','#alert_placeholder');
+            return false;
+          }
+          if(valor_produto == ""){
+            alert_boot('Informe o valor do produto','danger','#alert_placeholder');
+            return false;
+          }
+          if(quantidade ==""){
+            alert_boot('Informe a quantidade','danger','#alert_placeholder');
+            return false;
+          }
+
+          incluiProduto();
+      });
+ });
+
+
+ $(document).ready(function(){
+      $("#btnSalvarServico").click(function(){
+          var produto = $('#servico_id').val();
+          var valor_produto = $('#valor_servico').val();
+          var quantidade = $('#quantidadeServico').val();
+
+          if(produto == ""){
+            alert_boot('Pesquise pelo serviço','danger','#alert_placeholder');
+            return false;
+          }
+          if(valor_produto == ""){
+            alert_boot('Informe o valor do serviço','danger','#alert_placeholder');
+            return false;
+          }
+          if(quantidade ==""){
+            alert_boot('Informe a quantidade','danger','#alert_placeholder');
+            return false;
+          }
+
+          incluiServico();
+      });
+ });
+
+
+buscaDespesas();
+buscaServicos()
+//funcão que busca todas as despesas
+  function buscaDespesas(){
+     $.ajax({
+       url: '<%= buscaProdutosServicos_path %>',
+       data : {
+         ordemservico: '<%=@serviceordem.id%>'
+       },
+       success: function(data){
+         monta_tabela_produto(data);
+       }
+     })
+  };
+
+  function buscaServicos(){
+     $.ajax({
+       url: '<%= buscaServicosServicos_path %>',
+       data : {
+         ordemservico: '<%=@serviceordem.id%>'
+       },
+       success: function(data){
+         monta_tabela_servico(data);
+       }
+     })
+  };
+
+ function incluiProduto(){
+
+     $.ajax({
+       url: '<%= addProdutoOrdem_path %>',
+       data : {
+         ordemservico: '<%=@serviceordem.id%>',
+         produto_id:  $('#produto_id').val(),
+         valor_produto: $('#valor_produto').val(),
+         qtd_produto: $('#quantidade').val()
+       },
+       success: function(data){
+          limpa_ordem();
+          buscaDespesas();
+       }
+     })
+  };
+
+  function incluiServico(){
+
+      $.ajax({
+        url: '<%= addServicoOrdem_path %>',
+        data : {
+          ordemservico: '<%=@serviceordem.id%>',
+          service_id:  $('#servico_id').val(),
+          valor_service: $('#valor_servico').val(),
+          qtd_service: $('#quantidade_servico').val()
+        },
+        success: function(data){
+           limpa_servico();
+           buscaServicos();
+        }
+      })
+   };
+
+  function excluiDespesas(id){
+     $.ajax({
+       url: '<%= excluiProdutoOrdem_path %>',
+       data : {
+         id: id
+       },
+       success: function(data){
+          limpa_ordem();
+          buscaDespesas();
+       }
+     })
+  };
+
+  function excluiServico(id){
+     $.ajax({
+       url: '<%= excluiServicoOrdem_path %>',
+       data : {
+         id: id
+       },
+       success: function(data){
+          limpa_servico();
+          buscaServicos();
+       }
+     })
+  };
+
+function limpa_servico(){
+      $('#servico_id').val("");
+      $('#valor_servico').val("");
+      $('#quantidade').val("");
+      $('#servico').val("");
+    }
+
+function limpa_ordem(){
+    $('#produto_id').val("");
+    $('#valor_produto').val("");
+    $('#quantidade').val("");
+    $('#produto').val("");
+  }
+
+
+function monta_tabela_produto(data){
+    var html = "";
+    var valor = 0;
+    $("#tbprodutos").empty();
+     for (var i in data) {
+       var item = data[i];
+       $('#valor_total_produto').text(item.valor_total_produtos);
+       valor = (valor + item.valor_total);
+       html += "<tr><td>"+item.nome_produto+"</td>";
+       html += "<td>"+item.valor_product+"</td>";
+       html += "<td>"+item.qtd_product+"</td>";
+       html += "<td align='right'>"+item.valor_total+"</td>";
+       html += "<td Align='center'>";
+      //  html += " <button type='button' onclick='chama_editar("+item.id+")' data-toggle='tooltip' title='Editar' class='btn btn-primary btn-xs' aria-label='Left Align'>";
+      //  html += "  <span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></button>";
+       html += " <button type='button' onclick='excluiDespesas("+item.id+")' data-toggle='tooltip' title='Excluir' class='btn btn-danger btn-xs' aria-label='Left Align'>";
+       html += "  <span class='glyphicon glyphicon-trash' aria-hidden='true'></span></button></tr>";
+     };
+     $("#tbprodutos").append(html);
+   };
+
+   function monta_tabela_servico(data){
+       var html = "";
+       var valor = 0;
+       $("#tbservicos").empty();
+        for (var i in data) {
+          var item = data[i];
+          $('#valor_total_servico').text(item.valor_total_servico);
+          valor = (valor + item.valor_total);
+          html += "<tr><td>"+item.nome_servico+"</td>";
+          html += "<td>"+item.valor_servico+"</td>";
+          html += "<td>"+item.qtd_servico+"</td>";
+          html += "<td align='right'>"+item.valor_total+"</td>";
+          html += "<td Align='center'>";
+         //  html += " <button type='button' onclick='chama_editar("+item.id+")' data-toggle='tooltip' title='Editar' class='btn btn-primary btn-xs' aria-label='Left Align'>";
+         //  html += "  <span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></button>";
+          html += " <button type='button' onclick='excluiServico("+item.id+")' data-toggle='tooltip' title='Excluir' class='btn btn-danger btn-xs' aria-label='Left Align'>";
+          html += "  <span class='glyphicon glyphicon-trash' aria-hidden='true'></span></button></tr>";
+        };
+        $("#tbservicos").append(html);
+      };
+
+jQuery(function($){
+  $("#serviceordem_horainicio").mask("99:99");
+  $("#serviceordem_horafim").mask("99:99");
+  $("#sivic_discipulo_NUMR_CPF").mask("999.999.999.99");
+});
 
 $(document).ready(function() {
    $('#nome').autocomplete({
@@ -101,6 +469,46 @@ if (ui.item) {
   });
 });
 
+$(document).ready(function() {
+   $('#produto').autocomplete({
+   source: '/buscaproduto',
+   dataType: 'json',
+   minLength: 0,
+   change: function(event, ui) {
+   if (!ui.item) {
+   $('#produto').val('');
+ }
+},
+
+select: function(event, ui) {
+if (ui.item) {
+     $("#produto_id").val(ui.item.id);
+      }
+   }
+  });
+});
+
+
+$(document).ready(function() {
+   $('#servico').autocomplete({
+   source: '/buscaservico',
+   dataType: 'json',
+   minLength: 0,
+   change: function(event, ui) {
+   if (!ui.item) {
+   $('#servico').val('');
+ }
+},
+
+select: function(event, ui) {
+if (ui.item) {
+     $("#servico_id").val(ui.item.id);
+      }
+   }
+  });
+});
+
+
 $(function () {
    $('#datetimepicker1').datepicker({
      format: 'dd/mm/yyyy',
@@ -112,4 +520,18 @@ $(function () {
      language: 'pt-BR'
    });
 });
+
+
+$(function() {
+ $("#valor_produto").maskMoney({showSymbol:true, symbol:"R$", decimal:",", thousands:"."});
+})
+
+$(function() {
+ $("#valor_servico").maskMoney({showSymbol:true, symbol:"R$", decimal:",", thousands:"."});
+})
+
+function alert_boot(message,color,place) {
+  $(place).html('<div style="padding: 8px;" class="alert alert-'+ color +'" role="alert">'+message+'<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> </div>')
+}
+
 </script>

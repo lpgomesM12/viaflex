@@ -1,13 +1,19 @@
 class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
+  
   def busca
    @cliente = Client.search(params[:term]).limit(10)
   end
   # GET /clients
   # GET /clients.json
   def index
-    @clients = Client.page(params[:page]).per(10)
+    if params[:q]
+      @q = params[:q]
+     @clients= Client.busca(params[:q]).page(params[:page]).per(6)
+    else
+     @clients = Client.page(params[:page]).per(6)
+   end
   end
 
   # GET /clients/1
@@ -72,6 +78,6 @@ class ClientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def client_params
-      params.require(:client).permit(:nome, :telefone1, :telefone2, :desc_uf, :nome_cidade, :desc_endereco, :nome_bairro, :desc_pontoreferencia, :numr_endereco, :desc_cep)
+      params.require(:client).permit(:nome, :telefone1, :telefone2, :desc_uf, :nome_cidade, :desc_endereco, :nome_bairro, :desc_pontoreferencia, :numr_endereco, :desc_cep, :situacao, :observacao, :cpf, :rg)
     end
 end

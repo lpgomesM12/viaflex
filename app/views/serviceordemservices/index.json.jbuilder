@@ -1,0 +1,1 @@
+json.array! @serviceordemservices, partial: 'serviceordemservices/serviceordemservice', as: :serviceordemservice

@@ -1,0 +1,26 @@
+<div class="page-header">
+  <%= link_to serviceordemservices_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
+  <% end %>
+  <%= link_to edit_serviceordemservice_path(@serviceordemservice), class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    Edit
+  <% end %>
+  <h1>Show serviceordemservice</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Serviceordem:</dt>
+  <dd><%= @serviceordemservice.serviceordem %></dd>
+
+  <dt>Service:</dt>
+  <dd><%= @serviceordemservice.service %></dd>
+
+  <dt>Valor service:</dt>
+  <dd><%= @serviceordemservice.valor_service %></dd>
+
+  <dt>Qtd service:</dt>
+  <dd><%= @serviceordemservice.qtd_service %></dd>
+
+</dl>

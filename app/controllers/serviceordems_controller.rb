@@ -1,6 +1,10 @@
 class ServiceordemsController < ApplicationController
   before_action :set_serviceordem, only: [:show, :edit, :update, :destroy]
 
+ def agendamento
+   @serviceordems = Serviceordem.page(params[:page]).per(20)
+ end
+
  def relatorio
    @serviceordem = Serviceordem.find(params[:id])
 
@@ -13,7 +17,14 @@ class ServiceordemsController < ApplicationController
   # GET /serviceordems
   # GET /serviceordems.json
   def index
-    @serviceordems = Serviceordem.page(params[:page]).per(10)
+
+  if params[:q]
+     @q = params[:q]
+     @serviceordems= Serviceordem.busca(params[:q]).page(params[:page]).per(6)
+    else
+      @serviceordems = Serviceordem.page(params[:page]).per(6)
+   end
+
   end
 
   # GET /serviceordems/1
@@ -24,6 +35,13 @@ class ServiceordemsController < ApplicationController
   # GET /serviceordems/new
   def new
     @serviceordem = Serviceordem.new
+    @serviceordem.situacao = "Orçamento"
+
+    @serviceordem.save
+
+
+    redirect_to edit_serviceordem_path(@serviceordem)
+
   end
 
   # GET /serviceordems/1/edit
@@ -80,6 +98,6 @@ class ServiceordemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def serviceordem_params
-      params.require(:serviceordem).permit(:desc_produto, :nome_tecnicoatendimento, :data_venda, :data_instalacao, :desc_formapagamento, :tele_parente1, :tele_parente2, :client_id)
+      params.require(:serviceordem).permit(:desc_produto, :nome_tecnicoatendimento, :data_venda, :data_instalacao, :desc_formapagamento, :tele_parente1, :tele_parente2, :client_id, :situacao, :turno, :dias_validadeproposta, :dias_prazoentrega, :horainicio, :horafim, fotoordemservice_attributes: [:id, :_destroy, :foto])
     end
 end
